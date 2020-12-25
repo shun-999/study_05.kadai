@@ -64,13 +64,16 @@ def master_recog(file):
 
 
 #main実行
-item_master = master_recog("./master.csv")
-order = Order(item_master)
+class Main:
+    def __init__(self):
+        item_master = master_recog("./master.csv")
+        self.order = Order(item_master)
 
-def main1(code_name, sum_num):
-    order.add_item_order(code_name, int(sum_num))
+    def main1(self, code_name, sum_num):
+        self.order.add_item_order(code_name, int(sum_num))
 
-def main2(depo):
-    pay_out = depo
-    order.payment(pay_out)
-    order.view_item_list()
+
+    def main2(self, depo):
+        pay_out = depo
+        self.order.payment(pay_out)
+        self.order.view_item_list()
