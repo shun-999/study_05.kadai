@@ -1,7 +1,6 @@
 import pandas as pd
 import datetime
 import eel
-
 ### 商品クラス
 class Item:
     #インスタンス化
@@ -13,8 +12,6 @@ class Item:
     #金額
     def get_price(self):
         return self.price
-
-
 ### オーダークラス
 class Order:
     #インスタンス化
@@ -54,24 +51,22 @@ class Order:
         eel.finish_change(f"{change}")
 
 #マスタ登録
-def master_recog(file):
+def master_recog(file_name):
     item_master=[]
-    df = pd.read_csv(file)
+    df = pd.read_csv(file_name)
     for item,name,price in zip(list(df["商品コード"]),list(df["商品名"]),list(df["価格"])):
         item_master.append(Item(str(item),name,price))
     return item_master
 
 
-
 #main実行
 class Main:
-    def __init__(self):
-        item_master = master_recog("./master.csv")
+    def main0(self, file_name):
+        item_master = master_recog(file_name)
         self.order = Order(item_master)
 
     def main1(self, code_name, sum_num):
         self.order.add_item_order(code_name, int(sum_num))
-
 
     def main2(self, depo):
         pay_out = depo

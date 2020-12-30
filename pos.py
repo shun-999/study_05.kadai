@@ -7,6 +7,10 @@ end_point="desktop.html"
 posl1 = possys.Main()
 
 @eel.expose
+def master_finish(file_name):
+    posl1.main0(file_name)
+
+@eel.expose
 def order_finish(code, num):
     posl1.main1(code, num)
 

@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>レジ</title>
+        <link rel="stylesheet" href="./style.css" >
+    </head>
+    <body>
+        <header>
+            <h1>レジ</h1>
+        </header>
+        <form name="form">
+            マスタ登録：<input id="master" type="text" name="マスタ登録">
+            <button type="button" id="submit0" name="submit0">登録</button>
+            <hr>
+            商品コード:<input id="code" type="text" name="コード" />
+            個数:<input id="num" type="text" name="個数" /> 
+            <button type="button" id="submit" name="submit">送信</button>
+        </form>
+        <hr>
+        <p>商品内容</p>
+        <textarea id="result" type="textarea" name="content"></textarea>
+        <hr>
+        <div>            
+        <h3>お預かり金</h3>
+        <input id="depo" type="text" name="お預かり金">
+        <button type="button" id="submit2" name="submit2">送信</button>
+        <hr>
+        <h2>会計</h2>
+        <div>
+            <h3>合計金額</h3>
+            <input id="sum" type="text" name="合計金額">
+            <h3>お釣り</h3>
+            <input id="change" type="text" name="お釣り">
+        </div>
+        <script type="text/javascript" src="/eel.js"></script>
+        <script>
+            submit0.addEventListener("click", () => {
+                eel.master_finish(form.master.value);
+            });
+            submit.addEventListener("click", () => {
+                eel.order_finish(form.code.value, form.num.value);
+            });
+            submit2.addEventListener("click", () => {
+                eel.col_finish(depo.value);
+            });
+            
+            eel.expose(view_log_js);
+            function view_log_js(content){
+                result.value += content + "\n";
+            }
+            eel.expose(sum_cost);
+            function sum_cost(content2){
+                sum.value = content2;
+            }
+            eel.expose(finish_change);
+            function finish_change(content3){
+                change.value = content3;
+            }
+        </script>
+    </body>
+</html>
