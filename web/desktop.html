@@ -9,6 +9,9 @@
             <h1>レジ</h1>
         </header>
         <form name="form">
+            マスタ登録：<input id="master" type="text" name="マスタ登録">
+            <button type="button" id="submit0" name="submit0">登録</button>
+            <hr>
             商品コード:<input id="code" type="text" name="コード" />
             個数:<input id="num" type="text" name="個数" /> 
             <button type="button" id="submit" name="submit">送信</button>
@@ -31,6 +34,9 @@
         </div>
         <script type="text/javascript" src="/eel.js"></script>
         <script>
+            submit0.addEventListener("click", () => {
+                eel.master_finish(form.master.value);
+            });
             submit.addEventListener("click", () => {
                 eel.order_finish(form.code.value, form.num.value);
             });
