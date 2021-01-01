@@ -36,19 +36,19 @@ class Order:
                 num = item_number
                 eel.view_log_js(f"商品コード:{code},商品名:{name},価格:{price},個数:{num}")
 
-    def payment(self, payment):
-        self.deposit = payment
     
-    def view_item_list(self):
+    def view_item_list(self, deposit, count):
         sum_price = 0
         sum_num = 0
         for price,num  in zip(self.item_order_price, self.item_number):
             sum_price += price*num
             sum_num += num
-        cost = sum_price
-        eel.sum_cost(f"{cost}")
-        change = int(self.deposit) - sum_price
+        eel.sum_cost(f"{sum_price}")
+        one_cost = sum_price / int(count)
+        eel.one_count(f"{one_cost}")
+        change = int(deposit) - sum_price
         eel.finish_change(f"{change}")
+
 
 #マスタ登録
 def master_recog(file_name):
@@ -61,14 +61,13 @@ def master_recog(file_name):
 
 #main実行
 class Main:
-    def main0(self, file_name):
+    def master_input(self, file_name):
         item_master = master_recog(file_name)
         self.order = Order(item_master)
 
-    def main1(self, code_name, sum_num):
+    def order_input(self, code_name, sum_num):
         self.order.add_item_order(code_name, int(sum_num))
 
-    def main2(self, depo):
-        pay_out = depo
-        self.order.payment(pay_out)
-        self.order.view_item_list()
+    def calculation_result(self, deposit, count):
+        self.order.view_item_list(deposit, count)
+    
